@@ -93,5 +93,4 @@ jobs:
           assert result["decision"] == "promote"
           assert result["violations"] == []
           PY
-          assert result["violations"] == []
-          PY
+          
