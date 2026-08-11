@@ -1,3 +1,4 @@
+```yaml
 name: TDS GA7 Release Gate
 
 on:
@@ -93,4 +94,4 @@ jobs:
           assert result["decision"] == "promote"
           assert result["violations"] == []
           PY
-          
+```
