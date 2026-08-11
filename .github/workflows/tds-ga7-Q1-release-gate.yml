@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: TDS identity: 22f1001730@ds.study.iitm.ac.in
-        run: echo "TDS identity: 22f1001730@ds.study.iitm.ac.in"
+      - name: "TDS identity"
+        run: echo "TDS identity"
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,7 +38,7 @@ jobs:
       - name: Test release gate
         working-directory: Q1
         run: |
-          python - <<'PY'
+          python - <<'PYTEST'
           import json
           import urllib.request
 
@@ -90,7 +90,6 @@ jobs:
               result = json.load(response)
 
           print(json.dumps(result))
-
           assert result["decision"] == "promote"
           assert result["violations"] == []
-          PY
+          PYTEST
