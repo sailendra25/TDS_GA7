@@ -25,14 +25,17 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
+        working-directory: Q1
         run: pip install -r requirements.txt
 
       - name: Start service
+        working-directory: Q1
         run: |
           uvicorn main:app --host 127.0.0.1 --port 8000 &
           sleep 3
 
       - name: Test release gate
+        working-directory: Q1
         run: |
           python - <<'PY'
           import json
@@ -88,5 +91,7 @@ jobs:
           print(json.dumps(result))
 
           assert result["decision"] == "promote"
+          assert result["violations"] == []
+          PY
           assert result["violations"] == []
           PY
