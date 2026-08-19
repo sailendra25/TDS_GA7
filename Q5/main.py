@@ -61,7 +61,6 @@ def valid_source(source):
         "origin",
         "observedAt",
         "value",
-        "authoritative",
     }
 
     if not required.issubset(source):
@@ -80,10 +79,6 @@ def valid_source(source):
         return False
 
     if source["type"] not in VALID_TYPES:
-        return False
-
-    # authoritative is used as a boolean, so require boolean.
-    if not isinstance(source["authoritative"], bool):
         return False
 
     return True
@@ -164,7 +159,7 @@ async def corroborate(request: Request):
     contradicting = [
         source
         for source in valid_sources
-        if source["authoritative"] is True and source["value"] != claim_value
+        if source.get("authoritative") is True and source["value"] != claim_value
     ]
 
     if contradicting:
