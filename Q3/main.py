@@ -112,6 +112,9 @@ async def terraform_plan(request: Request):
     if not valid_string(resource["action"]):
         return result("reject", "INVALID_PLAN")
 
+    if resource["action"] not in ALLOWED_ACTIONS:
+        return result("reject", "INVALID_PLAN")
+
     if not isinstance(resource["labels"], dict):
         return result("reject", "INVALID_PLAN")
 
